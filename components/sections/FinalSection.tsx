@@ -16,15 +16,44 @@ export function FinalSection() {
   const inView = useInView(sectionRef, { amount: 0.4, once: true });
 
   const pausedForGalleryRef = useRef(false);
+  const inViewRef = useRef(false);
 
-  // Create audio element client-side only
+  // Keep a ref in sync with inView so the unlock callback can read the latest value
+  useEffect(() => { inViewRef.current = inView; }, [inView]);
+
+  // Create audio + register a one-time unlock on the first user gesture.
+  // Browsers on production HTTPS (Safari, Chrome mobile) block play() from
+  // IntersectionObserver callbacks because they are not "user gesture" contexts.
+  // The unlock pre-authorises the element so the scroll trigger works.
   useEffect(() => {
-    audioRef.current = new Audio("/track/lastslide.mp3");
-    audioRef.current.volume = 0.65;
-    return () => { audioRef.current?.pause(); };
+    const audio = new Audio("/track/lastslide.mp3");
+    audio.volume = 0.65;
+    audioRef.current = audio;
+
+    const unlock = () => {
+      if (inViewRef.current) {
+        // Section already in view when user first interacts — play immediately.
+        audio.play().catch(() => {});
+      } else {
+        // Not in view yet — play then pause to unlock, play for real on scroll.
+        audio.play().then(() => {
+          audio.pause();
+          audio.currentTime = 0;
+        }).catch(() => {});
+      }
+    };
+
+    window.addEventListener("click", unlock, { once: true });
+    window.addEventListener("touchstart", unlock, { once: true });
+
+    return () => {
+      audio.pause();
+      window.removeEventListener("click", unlock);
+      window.removeEventListener("touchstart", unlock);
+    };
   }, []);
 
-  // Play once when section scrolls into view
+  // Play once when section scrolls into view (succeeds after audio is unlocked above)
   useEffect(() => {
     if (inView) audioRef.current?.play().catch(() => {});
   }, [inView]);
