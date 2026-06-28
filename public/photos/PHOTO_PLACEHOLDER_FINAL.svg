@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f1330"/>
+      <stop offset="1" stop-color="#24306b"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.7" cy="0.3" r="0.6">
+      <stop offset="0" stop-color="#e9a6bd" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#e9a6bd" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#g)"/>
+  <rect width="1200" height="900" fill="url(#glow)"/>
+  <!-- soft sparkles -->
+  <circle cx="1113" cy="137" r="1.2" fill="#f5f1ea" opacity="0.33"/>
+  <circle cx="1033" cy="851" r="1.3" fill="#f5f1ea" opacity="0.40"/>
+  <circle cx="311" cy="683" r="2.3" fill="#f5f1ea" opacity="0.22"/>
+  <circle cx="1119" cy="212" r="2.2" fill="#f5f1ea" opacity="0.58"/>
+  <circle cx="627" cy="414" r="2.8" fill="#f5f1ea" opacity="0.21"/>
+  <circle cx="627" cy="445" r="2.0" fill="#f5f1ea" opacity="0.30"/>
+  <circle cx="561" cy="323" r="1.9" fill="#f5f1ea" opacity="0.61"/>
+  <circle cx="952" cy="385" r="1.4" fill="#f5f1ea" opacity="0.66"/>
+  <circle cx="332" cy="245" r="2.6" fill="#f5f1ea" opacity="0.34"/>
+  <circle cx="509" cy="738" r="2.3" fill="#f5f1ea" opacity="0.58"/>
+  <circle cx="1124" cy="112" r="1.8" fill="#f5f1ea" opacity="0.33"/>
+  <circle cx="997" cy="406" r="2.0" fill="#f5f1ea" opacity="0.32"/>
+  <circle cx="118" cy="795" r="2.9" fill="#f5f1ea" opacity="0.34"/>
+  <circle cx="310" cy="537" r="1.8" fill="#f5f1ea" opacity="0.61"/>
+  <circle cx="1" cy="438" r="1.1" fill="#f5f1ea" opacity="0.42"/>
+  <circle cx="158" cy="81" r="1.2" fill="#f5f1ea" opacity="0.43"/>
+  <circle cx="1006" cy="505" r="1.1" fill="#f5f1ea" opacity="0.35"/>
+  <circle cx="836" cy="3" r="2.4" fill="#f5f1ea" opacity="0.57"/>
+  <!-- frame -->
+  <rect x="370" y="300" width="460" height="300" rx="24"
+        fill="none" stroke="#e9a6bd" stroke-opacity="0.5" stroke-width="2"/>
+  <!-- icon: a house for the future-home placeholders, otherwise a heart -->
+  <path transform="translate(582,354) scale(1.4)"
+        d="M18 30 C 4 18, 4 6, 12 4 C 16 3, 18 6, 18 8 C 18 6, 20 3, 24 4 C 32 6, 32 18, 18 30 Z"
+        fill="#e9a6bd" opacity="0.85"/>
+  <text x="50%" y="470" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="34"
+        fill="#f5f1ea" letter-spacing="3">PHOTO_PLACEHOLDER_FINAL</text>
+  <text x="50%" y="518" text-anchor="middle"
+        font-family="Georgia, serif" font-size="20" fill="#a9b0cf" letter-spacing="2">
+    drop your photo here
+  </text>
+</svg>

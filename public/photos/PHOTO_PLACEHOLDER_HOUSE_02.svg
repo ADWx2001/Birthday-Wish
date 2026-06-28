@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10162e"/>
+      <stop offset="1" stop-color="#4a2f4f"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.7" cy="0.3" r="0.6">
+      <stop offset="0" stop-color="#ffe3ad" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#ffe3ad" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#g)"/>
+  <rect width="1200" height="900" fill="url(#glow)"/>
+  <!-- soft sparkles -->
+  <circle cx="820" cy="892" r="1.4" fill="#f5f1ea" opacity="0.54"/>
+  <circle cx="653" cy="542" r="1.9" fill="#f5f1ea" opacity="0.43"/>
+  <circle cx="338" cy="63" r="2.7" fill="#f5f1ea" opacity="0.39"/>
+  <circle cx="724" cy="179" r="2.9" fill="#f5f1ea" opacity="0.56"/>
+  <circle cx="790" cy="627" r="2.7" fill="#f5f1ea" opacity="0.34"/>
+  <circle cx="51" cy="307" r="1.5" fill="#f5f1ea" opacity="0.24"/>
+  <circle cx="1173" cy="385" r="1.2" fill="#f5f1ea" opacity="0.67"/>
+  <circle cx="521" cy="81" r="2.4" fill="#f5f1ea" opacity="0.39"/>
+  <circle cx="89" cy="549" r="1.0" fill="#f5f1ea" opacity="0.52"/>
+  <circle cx="422" cy="386" r="2.4" fill="#f5f1ea" opacity="0.45"/>
+  <circle cx="767" cy="401" r="1.4" fill="#f5f1ea" opacity="0.63"/>
+  <circle cx="434" cy="840" r="2.4" fill="#f5f1ea" opacity="0.54"/>
+  <circle cx="70" cy="57" r="1.3" fill="#f5f1ea" opacity="0.53"/>
+  <circle cx="940" cy="172" r="1.7" fill="#f5f1ea" opacity="0.48"/>
+  <circle cx="261" cy="409" r="1.0" fill="#f5f1ea" opacity="0.30"/>
+  <circle cx="464" cy="65" r="1.0" fill="#f5f1ea" opacity="0.26"/>
+  <circle cx="1000" cy="810" r="1.1" fill="#f5f1ea" opacity="0.42"/>
+  <circle cx="647" cy="223" r="2.8" fill="#f5f1ea" opacity="0.25"/>
+  <!-- frame -->
+  <rect x="370" y="300" width="460" height="300" rx="24"
+        fill="none" stroke="#ffe3ad" stroke-opacity="0.5" stroke-width="2"/>
+  <!-- icon: a house for the future-home placeholders, otherwise a heart -->
+  <g transform="translate(566,346) scale(2.0)" fill="#ffe3ad" opacity="0.9">
+    <path d="M17 2 L32 14 L29 14 L29 30 L20 30 L20 21 L14 21 L14 30 L5 30 L5 14 L2 14 Z"/>
+  </g>
+  <text x="50%" y="470" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif" font-size="34"
+        fill="#f5f1ea" letter-spacing="3">PHOTO_PLACEHOLDER_HOUSE_02</text>
+  <text x="50%" y="518" text-anchor="middle"
+        font-family="Georgia, serif" font-size="20" fill="#a9b0cf" letter-spacing="2">
+    drop your photo here
+  </text>
+</svg>

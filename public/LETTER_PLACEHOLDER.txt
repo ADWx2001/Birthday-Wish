@@ -1,0 +1,7 @@
+LETTER_PLACEHOLDER
+
+This file is just a convenient place to draft your love letter.
+The text the site actually displays lives in `lib/content.ts` under `letter.body`.
+
+Write whatever is in your heart here, then paste it into `letter.body`.
+Blank lines between paragraphs are preserved as separate paragraphs.

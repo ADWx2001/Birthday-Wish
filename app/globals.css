@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+/* ───────────────────────────── Theme tokens ───────────────────────────── */
+:root {
+  /* Base night palette */
+  --black: #04050a;
+  --navy-deep: #080b1c;
+  --navy: #0f1330;
+  --blue-dark: #161d45;
+  --blue: #24306b;
+
+  /* Warm + accent lights */
+  --gold: #f4c982;
+  --gold-soft: #ffe3ad;
+  --gold-glow: rgba(244, 201, 130, 0.55);
+  --rose: #e9a6bd;
+  --rose-soft: #f6c9d6;
+  --purple: #b7a4ec;
+  --purple-soft: #d6caf6;
+
+  /* Text */
+  --white-soft: #f5f1ea;
+  --foreground: #e9e6f1;
+  --muted: #a9b0cf;
+
+  /* The page background is a single tall gradient so sections blend smoothly. */
+  --background: var(--navy-deep);
+
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-black: var(--black);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy: var(--navy);
+  --color-blue-dark: var(--blue-dark);
+  --color-blue: var(--blue);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-rose: var(--rose);
+  --color-purple: var(--purple);
+  --color-muted: var(--muted);
+
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+  --font-script: var(--font-script);
+}
+
+/* ───────────────────────────── Base ───────────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  /* One continuous gradient down the whole document = no abrupt section seams. */
+  background:
+    linear-gradient(
+      180deg,
+      var(--black) 0%,
+      var(--navy-deep) 12%,
+      var(--navy) 30%,
+      var(--blue-dark) 52%,
+      var(--navy) 72%,
+      var(--navy-deep) 88%,
+      var(--black) 100%
+    );
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .font-serif {
+  font-family: var(--font-serif), Georgia, serif;
+}
+
+.font-script {
+  font-family: var(--font-script), cursive;
+}
+
+::selection {
+  background: var(--gold-glow);
+  color: var(--black);
+}
+
+/* ───────────────────────────── Lenis smooth scroll ───────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ───────────────────────────── Reusable utility classes ───────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 18px var(--gold-glow), 0 0 42px rgba(244, 201, 130, 0.25);
+}
+
+.text-glow-soft {
+  text-shadow: 0 0 24px rgba(245, 241, 234, 0.35);
+}
+
+/* ───────────────────────────── Keyframes ───────────────────────────── */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-22px) translateX(8px); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  41% { opacity: 1; }
+  42% { opacity: 0.55; }
+  44% { opacity: 1; }
+  60% { opacity: 1; }
+  61% { opacity: 0.7; }
+  62% { opacity: 1; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.06); }
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.22); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.22); }
+  56% { transform: scale(1); }
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes rise {
+  0% { transform: translateY(0) scale(0.6); opacity: 0; }
+  15% { opacity: 0.9; }
+  100% { transform: translateY(-90vh) scale(1.1); opacity: 0; }
+}
+
+.animate-twinkle { animation: twinkle 3s ease-in-out infinite; }
+.animate-float { animation: float-soft 9s ease-in-out infinite; }
+.animate-flicker { animation: flicker 6s linear infinite; }
+.animate-glow { animation: glow-pulse 4s ease-in-out infinite; }
+.animate-heartbeat { animation: heartbeat 1.6s ease-in-out infinite; }
+
+/* Scrollbar — subtle, on-theme */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--gold), var(--rose));
+  border-radius: 9999px;
+}
+
+/* ───────────────────────────── Reduced motion ───────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
