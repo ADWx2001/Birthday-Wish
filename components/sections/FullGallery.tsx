@@ -63,6 +63,16 @@ export function FullGallery() {
   const closeRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const galleryAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Create gallery audio element client-side only
+  useEffect(() => {
+    const audio = new Audio("/track/galleryaudio.mp3");
+    audio.loop = true;
+    audio.volume = 0.5;
+    galleryAudioRef.current = audio;
+    return () => { audio.pause(); };
+  }, []);
 
   const openGallery = () => setOpen(true);
   const closeGallery = useCallback(() => {
@@ -70,12 +80,19 @@ export function FullGallery() {
     triggerRef.current?.focus();
   }, []);
 
-  // Pause / resume Lenis so it doesn't intercept wheel + touch inside the overlay.
+  // Pause / resume Lenis + play / stop gallery audio with the overlay.
   useEffect(() => {
     if (open) {
       lenis?.stop();
+      galleryAudioRef.current?.play().catch(() => {});
+      window.dispatchEvent(new CustomEvent("fullgallery:open"));
     } else {
       lenis?.start();
+      if (galleryAudioRef.current) {
+        galleryAudioRef.current.pause();
+        galleryAudioRef.current.currentTime = 0;
+      }
+      window.dispatchEvent(new CustomEvent("fullgallery:close"));
     }
     return () => { lenis?.start(); };
   }, [open, lenis]);
@@ -202,27 +219,35 @@ export function FullGallery() {
               style={{ WebkitOverflowScrolling: "touch" }}
             >
               <div className="columns-2 gap-2 p-3 sm:columns-3 sm:gap-3 sm:p-4 lg:columns-4 xl:columns-5">
-                {IMAGES.map((src, i) => (
-                  <motion.div
-                    key={src}
-                    className="mb-2 break-inside-avoid overflow-hidden rounded-lg sm:mb-3 sm:rounded-xl"
-                    initial={reduced ? false : { opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                      duration: 0.4,
-                      delay: reduced ? 0 : Math.min(i * 0.025, 0.55),
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={src}
-                      alt={`Memory ${i + 1}`}
-                      loading="lazy"
-                      className="block h-auto w-full transition-transform duration-500 hover:scale-[1.03]"
-                    />
-                  </motion.div>
-                ))}
+                {IMAGES.map((src, i) => {
+                  // Cycle three entrance flavours: flip-right, flip-left, tilt-up
+                  const entryStyle = i % 3 === 0
+                    ? { opacity: 0, rotateY: 80, scale: 0.88 }
+                    : i % 3 === 1
+                    ? { opacity: 0, rotateY: -80, scale: 0.88 }
+                    : { opacity: 0, y: 40, rotateX: 18, scale: 0.92 };
+
+                  return (
+                    <motion.div
+                      key={src}
+                      className="mb-2 break-inside-avoid overflow-hidden rounded-lg sm:mb-3 sm:rounded-xl"
+                      style={{ perspective: "900px" }}
+                      initial={reduced ? false : entryStyle}
+                      whileInView={{ opacity: 1, rotateY: 0, rotateX: 0, y: 0, scale: 1 }}
+                      whileHover={reduced ? {} : { scale: 1.04, zIndex: 10 }}
+                      viewport={{ root: scrollContainerRef, once: false, amount: 0.12 }}
+                      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={src}
+                        alt={`Memory ${i + 1}`}
+                        loading="lazy"
+                        className="block h-auto w-full"
+                      />
+                    </motion.div>
+                  );
+                })}
               </div>
               {/* Bottom breathing room */}
               <div className="h-10" aria-hidden />

@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 import { content } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
@@ -8,16 +9,52 @@ import { Photo } from "@/components/ui/Photo";
 
 const SOFT_EASE = [0.22, 1, 0.36, 1] as const;
 
-/**
- * The closing chapter. As it scrolls into view a warm sunrise wash rises behind
- * everything, the most meaningful photo is revealed, and the "I Love You" line
- * is spelled out one letter at a time before the final thank-you fades in.
- */
 export function FinalSection() {
   const loveLetters = Array.from(content.final.loveLine);
+  const sectionRef = useRef<HTMLElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const inView = useInView(sectionRef, { amount: 0.4, once: true });
+
+  const pausedForGalleryRef = useRef(false);
+
+  // Create audio element client-side only
+  useEffect(() => {
+    audioRef.current = new Audio("/track/lastslide.mp3");
+    audioRef.current.volume = 0.65;
+    return () => { audioRef.current?.pause(); };
+  }, []);
+
+  // Play once when section scrolls into view
+  useEffect(() => {
+    if (inView) audioRef.current?.play().catch(() => {});
+  }, [inView]);
+
+  // Pause while full gallery is open; resume when it closes
+  useEffect(() => {
+    const onOpen = () => {
+      const audio = audioRef.current;
+      if (audio && !audio.paused) {
+        audio.pause();
+        pausedForGalleryRef.current = true;
+      }
+    };
+    const onClose = () => {
+      if (pausedForGalleryRef.current) {
+        audioRef.current?.play().catch(() => {});
+        pausedForGalleryRef.current = false;
+      }
+    };
+    window.addEventListener("fullgallery:open", onOpen);
+    window.addEventListener("fullgallery:close", onClose);
+    return () => {
+      window.removeEventListener("fullgallery:open", onOpen);
+      window.removeEventListener("fullgallery:close", onClose);
+    };
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       id="final"
       data-section="Happy Birthday My Love"
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-28 text-center"
