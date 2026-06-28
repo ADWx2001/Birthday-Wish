@@ -18,8 +18,8 @@ import type { SiteContent } from "./types";
  */
 export const content: SiteContent = {
   meta: {
-    title: "Happy Birthday ❤️",
-    description: "A little surprise, made with love.",
+    title: "Happy Birthday Suduu..❤️",
+    description: "A little surprise!!",
   },
 
   loading: {
@@ -30,7 +30,7 @@ export const content: SiteContent = {
     heading: "Happy Birthday",
     typewriter: [
       "මගේ ජීවිතේ ලස්සනම හමුවීම ඔයා... 🌸",
-      "අපි අතර මොන දේවල් වුණත්, මගේ හිතේ ඔයාට තියෙන ආදරේ කවදාවත් වෙනස් වෙන්නේ නැහැ.බබා  ❤️",
+      "අපි අතර මොන දේවල් වුණත්, මගේ හිතේ ඔයාට තියෙන ආදරේ කවදාවත් වෙනස් වෙන්නේ නැහැ. බබා  ❤️",
       "මේ පුංචි surprise එක, ඔයා වෙනුවෙන් හැදුවේ...🎀",
       "අපේ පුංචි කතාව, (චුට්ටක් තියෙන්නේ මෙතන හරිද)  ✨",
     ],
