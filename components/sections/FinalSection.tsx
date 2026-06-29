@@ -1,19 +1,36 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { FaHeart } from "react-icons/fa";
 import { content } from "@/lib/content";
 import { Reveal } from "@/components/ui/Reveal";
 import { Photo } from "@/components/ui/Photo";
+import { useReducedMotion } from "@/hooks/useReducedMotion";
 
 const SOFT_EASE = [0.22, 1, 0.36, 1] as const;
+
+const EMOJIS = ["🌸", "🌺", "🌷", "🌼", "💕", "✨", "💖", "🌸", "🌺", "⭐", "💮", "🌸"];
 
 export function FinalSection() {
   const loveLetters = Array.from(content.final.loveLine);
   const sectionRef = useRef<HTMLElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const inView = useInView(sectionRef, { amount: 0.4, once: true });
+  const reduced = useReducedMotion();
+  const [showCelebration, setShowCelebration] = useState(false);
+
+  const PARTICLES = useMemo(() =>
+    Array.from({ length: 72 }, (_, i) => ({
+      id: i,
+      emoji: EMOJIS[i % EMOJIS.length],
+      left: (i * 1.39) % 100,
+      delay: (i * 0.065) % 2.6,
+      duration: 3.2 + (i % 3) * 0.7,
+      size: 14 + (i % 18),
+      rise: i % 5 === 0,
+    })),
+  []);
 
   const pausedForGalleryRef = useRef(false);
   const inViewRef = useRef(false);
@@ -53,9 +70,14 @@ export function FinalSection() {
     };
   }, []);
 
-  // Play once when section scrolls into view (succeeds after audio is unlocked above)
+  // Play audio + launch celebration once when section scrolls into view
   useEffect(() => {
-    if (inView) audioRef.current?.play().catch(() => {});
+    if (inView) {
+      audioRef.current?.play().catch(() => {});
+      setShowCelebration(true);
+      const t = setTimeout(() => setShowCelebration(false), 5500);
+      return () => clearTimeout(t);
+    }
   }, [inView]);
 
   // Pause while full gallery is open; resume when it closes
@@ -82,6 +104,7 @@ export function FinalSection() {
   }, []);
 
   return (
+    <>
     <section
       ref={sectionRef}
       id="final"
@@ -174,5 +197,34 @@ export function FinalSection() {
         </motion.p>
       </Reveal>
     </section>
+
+    {/* ── Floral celebration overlay — triggers when the song starts ── */}
+    <AnimatePresence>
+      {showCelebration && !reduced && (
+        <motion.div
+          className="pointer-events-none fixed inset-0 z-[90] overflow-hidden"
+          initial={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2 }}
+          aria-hidden
+        >
+          {PARTICLES.map((p) => (
+            <span
+              key={p.id}
+              style={{
+                position: "absolute",
+                left: `${p.left}%`,
+                ...(p.rise ? { bottom: "-5%" } : { top: "-5%" }),
+                fontSize: `${p.size}px`,
+                animation: `${p.rise ? "rise" : "fall"} ${p.duration}s ${p.delay}s ease-in forwards`,
+              }}
+            >
+              {p.emoji}
+            </span>
+          ))}
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }
