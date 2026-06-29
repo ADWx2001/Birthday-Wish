@@ -46,12 +46,12 @@ export function SecretLetter() {
       <Reveal animation="scale" className="flex flex-col items-center gap-10">
 
         {/* ── Envelope ── */}
-        <div className="relative w-full max-w-lg" style={{ perspective: 1200 }}>
+        <div className="relative w-full max-w-2xl" style={{ perspective: 1200 }}>
           {/* Envelope shell — expands when opened so the letter is easy to read */}
           <motion.div
             className="relative rounded-2xl shadow-2xl overflow-hidden"
             style={{ background: "linear-gradient(145deg, #c8a96e 0%, #a07840 100%)" }}
-            animate={{ height: unlocked ? 520 : 320 }}
+            animate={{ height: unlocked ? 560 : 320 }}
             transition={reduced ? { duration: 0 } : { duration: 0.8, delay: unlocked ? 0.5 : 0, ease: SOFT_EASE }}
           >
             {/* Parchment interior (always visible behind the flap) */}
