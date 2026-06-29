@@ -108,15 +108,21 @@ export function FullGallery() {
     return () => document.removeEventListener("keydown", onKey);
   }, [open, closeGallery]);
 
-  // Belt-and-suspenders: stop wheel propagation at the container level so
-  // Lenis (even if not fully paused) can't intercept it.
+  // Stop wheel + touch propagation so Lenis can't intercept either input method.
   useEffect(() => {
     if (!open) return;
     const el = scrollContainerRef.current;
     if (!el) return;
     const onWheel = (e: WheelEvent) => e.stopPropagation();
+    const onTouch = (e: TouchEvent) => e.stopPropagation();
     el.addEventListener("wheel", onWheel, { passive: true });
-    return () => el.removeEventListener("wheel", onWheel);
+    el.addEventListener("touchstart", onTouch, { passive: true });
+    el.addEventListener("touchmove", onTouch, { passive: true });
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+      el.removeEventListener("touchstart", onTouch);
+      el.removeEventListener("touchmove", onTouch);
+    };
   }, [open]);
 
   return (
@@ -212,11 +218,12 @@ export function FullGallery() {
               </button>
             </div>
 
-            {/* Scrollable masonry — ref needed for Lenis bypass + touch scroll on iOS */}
+            {/* Scrollable masonry — flex-1 min-h-0 gives it a defined height so
+                overflow-y-auto actually works on mobile */}
             <div
               ref={scrollContainerRef}
-              className="overflow-y-auto overscroll-contain"
-              style={{ WebkitOverflowScrolling: "touch" }}
+              className="flex-1 min-h-0 overflow-y-auto overscroll-contain"
+              style={{ WebkitOverflowScrolling: "touch", touchAction: "pan-y" }}
             >
               <div className="columns-2 gap-2 p-3 sm:columns-3 sm:gap-3 sm:p-4 lg:columns-4 xl:columns-5">
                 {IMAGES.map((src, i) => {
