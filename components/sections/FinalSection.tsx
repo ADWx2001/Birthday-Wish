@@ -21,13 +21,13 @@ export function FinalSection() {
   const [showCelebration, setShowCelebration] = useState(false);
 
   const PARTICLES = useMemo(() =>
-    Array.from({ length: 72 }, (_, i) => ({
+    Array.from({ length: 130 }, (_, i) => ({
       id: i,
       emoji: EMOJIS[i % EMOJIS.length],
-      left: (i * 1.39) % 100,
-      delay: (i * 0.065) % 2.6,
-      duration: 3.2 + (i % 3) * 0.7,
-      size: 14 + (i % 18),
+      left: (i * 0.77) % 100,
+      delay: (i * 0.07) % 5.0,
+      duration: 5.0 + (i % 5) * 0.8,
+      size: 14 + (i % 22),
       rise: i % 5 === 0,
     })),
   []);
@@ -75,7 +75,7 @@ export function FinalSection() {
     if (inView) {
       audioRef.current?.play().catch(() => {});
       setShowCelebration(true);
-      const t = setTimeout(() => setShowCelebration(false), 5500);
+      const t = setTimeout(() => setShowCelebration(false), 10000);
       return () => clearTimeout(t);
     }
   }, [inView]);
