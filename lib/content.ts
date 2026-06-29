@@ -345,7 +345,7 @@ export const content: SiteContent = {
     lockPrompt: "Enter the secret code to open this letter",
     lockHint: "🔢 The answer is hiding somewhere near the top of the page…",
     wrongMessage: "That's not the right code — try again!",
-    code: "7",
+    code: "16",
     heading: "My Dearest,",
     body: `Happy Birthday, my love! 🎂\n\nToday is all about you — the person who makes every single day brighter just by being in it. I hope this little corner of the internet made you smile, laugh, or maybe even tear up a little (the good kind!).\n\nEvery moment with you is a gift I never take for granted. You deserve every beautiful thing that comes your way — today and always. Thank you for choosing me, for believing in us, and for being exactly who you are.\n\nWith all my heart,`,
     signature: "Yours forever ❤️",
