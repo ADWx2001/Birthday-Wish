@@ -130,6 +130,16 @@ export interface SiteContent {
   };
   quotes: string[];
   surprise: SurpriseContent;
+  secretLetter: {
+    sectionTitle: string;
+    lockPrompt: string;
+    lockHint: string;
+    wrongMessage: string;
+    code: string;
+    heading: string;
+    body: string;
+    signature: string;
+  };
   final: FinalSectionContent;
   footer: {
     madeWith: string;

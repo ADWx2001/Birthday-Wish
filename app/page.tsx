@@ -39,6 +39,9 @@ const FinalSection = dynamic(() =>
 const KeyReveal = dynamic(() =>
   import("@/components/sections/KeyReveal").then((m) => m.KeyReveal),
 );
+const SecretLetter = dynamic(() =>
+  import("@/components/sections/SecretLetter").then((m) => m.SecretLetter),
+);
 const Footer = dynamic(() =>
   import("@/components/sections/Footer").then((m) => m.Footer),
 );
@@ -78,6 +81,7 @@ export default function Home() {
       <FinalSection />
 
       <KeyReveal />
+      <SecretLetter />
       <Footer />
     </>
   );

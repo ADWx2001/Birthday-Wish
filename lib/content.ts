@@ -306,12 +306,14 @@ export const content: SiteContent = {
     sectionTitle: "One More Surprise",
     lockPrompt: "Enter the secret key to unlock it",
     // Playful hint — the code is her age.
-    lockHint: "It's the number of years you've made the world brighter 😉",
+    lockHint:
+      "Guess කරන්න බලන්න මොකක්ද කියල code එක? වැරදුනොත් මං දෙන්නම් Tip එකක්..  😉",
     code: "26",
-    wrongMessage: "Not quite — try again, my love 💛",
+    wrongMessage:
+      "වැරදුනා නේද, අද වෙද්දී 4th feb 2026, ඔයාගේ වයස කියක් වගේ ඇතිද?? ඒක ආයේ Try කරන්න බලන්න . 😘💛",
     heading: "We're Going Home",
     message:
-      "This is the little dream we've been building together. Soon these walls, this door, this home — all of it will be ours. Our next chapter starts here.",
+      "This is the little dream we've been building together. Soon these walls, this door, this home ,all of it will be ours. Our next chapter starts here.",
     images: [
       {
         placeholder: "PHOTO_PLACEHOLDER_HOUSE_01",
@@ -336,6 +338,17 @@ export const content: SiteContent = {
     ],
     closing:
       "Here's to our home, and every morning we'll wake up in it together.",
+  },
+
+  secretLetter: {
+    sectionTitle: "A Letter Just for You 💌",
+    lockPrompt: "Enter the secret code to open this letter",
+    lockHint: "🔢 The answer is hiding somewhere near the top of the page…",
+    wrongMessage: "That's not the right code — try again!",
+    code: "7",
+    heading: "My Dearest,",
+    body: `Happy Birthday, my love! 🎂\n\nToday is all about you — the person who makes every single day brighter just by being in it. I hope this little corner of the internet made you smile, laugh, or maybe even tear up a little (the good kind!).\n\nEvery moment with you is a gift I never take for granted. You deserve every beautiful thing that comes your way — today and always. Thank you for choosing me, for believing in us, and for being exactly who you are.\n\nWith all my heart,`,
+    signature: "Yours forever ❤️",
   },
 
   final: {
