@@ -20,8 +20,12 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    if (reducedMotion) {
-      // Make sure ScrollTrigger still works with native scrolling.
+    // On touch devices, native momentum scroll is faster and smoother than
+    // JS-driven Lenis. Skip Lenis entirely; ScrollTrigger still works via its
+    // own IntersectionObserver and the scrollTo fallback uses scrollIntoView.
+    const isTouchDevice = window.matchMedia("(pointer: coarse)").matches;
+
+    if (reducedMotion || isTouchDevice) {
       ScrollTrigger.refresh();
       return;
     }

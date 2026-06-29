@@ -71,6 +71,7 @@ body {
     );
   background-attachment: fixed;
   overflow-x: hidden;
+  overscroll-behavior-y: contain;
 }
 
 h1, h2, h3, .font-serif {
