@@ -61,10 +61,10 @@ export function KeyReveal() {
           className="relative w-full max-w-3xl"
           style={{ perspective: 1600 }}
         >
-          <div className="relative aspect-[3/4] w-full overflow-hidden rounded-3xl ring-1 ring-white/15 sm:aspect-[4/3]">
-            {/* Reveal content (behind the doors) */}
+          <div className="relative w-full overflow-hidden rounded-3xl ring-1 ring-white/15">
+            {/* Reveal content — in normal flow so its height drives the container */}
             <div
-              className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-b from-[var(--navy)] to-[var(--blue-dark)] p-5 sm:p-8"
+              className="relative flex flex-col items-center justify-center bg-gradient-to-b from-[var(--navy)] to-[var(--blue-dark)] p-5 sm:p-8"
               aria-hidden={!unlocked}
             >
               <motion.div
