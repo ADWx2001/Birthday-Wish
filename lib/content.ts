@@ -343,7 +343,7 @@ export const content: SiteContent = {
   secretLetter: {
     sectionTitle: "A Letter Just for You 💌",
     lockPrompt: "Enter the secret code to open this letter",
-    lockHint: "🔢 The answer is hiding somewhere near the top of the page…",
+    lockHint: " test for now",
     wrongMessage: "That's not the right code — try again!",
     code: "16",
     heading: "My Dearest,",
@@ -368,7 +368,7 @@ export const content: SiteContent = {
 
 සුභ උපන්දිනයක්, මගේ ලොකු මැඩම්. ❤️`,
     signature: "All my love, always",
-    loveLine: "I Love You",
+    loveLine: "I Love You... ❤️",
     closingLine: "Thank you for being the most beautiful part of my life.",
   },
 
