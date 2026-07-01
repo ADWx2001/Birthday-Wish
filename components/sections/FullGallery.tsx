@@ -200,7 +200,7 @@ export function FullGallery() {
             {/* Wedding video overlay — plays softly over the gallery photos */}
             <video
               className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-              style={{ opacity: 0.7, zIndex: 5 }}
+              style={{ opacity: 0.5, zIndex: 5 }}
               src="/video/gallery-overlay.mp4"
               autoPlay
               muted
