@@ -197,6 +197,18 @@ export function FullGallery() {
             aria-modal="true"
             aria-label="Full photo gallery"
           >
+            {/* Wedding video overlay — plays softly over the gallery photos */}
+            <video
+              className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+              style={{ opacity: 0.22, mixBlendMode: "soft-light", zIndex: 5 }}
+              src="/video/gallery-overlay.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-hidden
+            />
+
             {/* Sticky header */}
             <div className="sticky top-0 z-10 flex shrink-0 items-center justify-between border-b border-white/8 bg-[#060810]/90 px-5 py-4 backdrop-blur-md sm:px-8">
               <div className="flex items-center gap-3">
